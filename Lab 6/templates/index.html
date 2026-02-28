@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smile Detection App</title>
+</head>
+<body>
+    <h2>Smile Detection Web App</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <button type="submit">Detect Smile</button>
+    </form>
+
+    {% if image %}
+        <h3>Result: {{ result }}</h3>
+        <img src="{{ image }}" width="400">
+    {% endif %}
+</body>
+</html>
