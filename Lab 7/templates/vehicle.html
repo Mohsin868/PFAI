@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vehicle Info Hub</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; text-align: center; padding: 50px; }
+        .card { background: white; padding: 30px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 400px; }
+        input { padding: 10px; width: 70%; border-radius: 5px; border: 1px solid #ddd; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .specs { text-align: left; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🔍 Vehicle Info App</h1>
+        <form method="POST">
+            <input type="text" name="car_model" placeholder="Enter Model (e.g., Civic, Vitz, Mustang)" required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if error %}<p style="color: red;">{{ error }}</p>{% endif %}
+
+        {% if car %}
+        <div class="specs">
+            <h3>🚗 {{ car.make.capitalize() }} {{ car.model.capitalize() }}</h3>
+            <p><strong>Year:</strong> {{ car.year }}</p>
+            <p><strong>Class:</strong> {{ car.class }}</p>
+            <p><strong>Transmission:</strong> {{ "Automatic" if car.transmission == "a" else "Manual" }}</p>
+            <p><strong>Fuel Type:</strong> {{ car.fuel_type.upper() }}</p>
+            <p><strong>Cylinders:</strong> {{ car.cylinders }}</p>
+            <p><strong>Drive:</strong> {{ car.drive.upper() }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
