@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Chat container */
+.chat-container {
+    width: 350px;
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Title */
+.chat-container h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Chat messages area */
+#chat-box {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+}
+
+.suggestions button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.3);
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.suggestions button:hover {
+    background: rgba(255,255,255,0.6);
+}
+
+/* Messages */
+.user {
+    text-align: right;
+    margin: 5px;
+    color: blue;
+}
+
+.bot {
+    text-align: left;
+    margin: 5px;
+    color: green;
+}
+
+/* Input area */
+.input-area {
+    display: flex;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.input-area button {
+    padding: 8px;
+    margin-left: 5px;
+    border: none;
+    background: #667eea;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}

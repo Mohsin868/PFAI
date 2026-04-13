@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hotel Assistant Chatbot</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* MAIN CONTAINER */
+.chat-container {
+    width: 420px;
+    height: 600px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* HEADER */
+.header {
+    background: #2c3e50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* CHAT AREA */
+.chat-box {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+/* MESSAGE STYLE */
+.message {
+    margin: 10px 0;
+    padding: 12px 14px;
+    border-radius: 15px;
+    max-width: 75%;
+    word-wrap: break-word;
+    animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* USER */
+.user {
+    background: #4a90e2;
+    color: white;
+    margin-left: auto;
+    text-align: right;
+}
+
+/* BOT */
+.bot {
+    background: #f1f1f1;
+    color: black;
+    margin-right: auto;
+}
+
+/* SUGGESTIONS */
+.suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+.suggestions button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 15px;
+    background: #ecf0f1;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+.suggestions button:hover {
+    background: #dcdde1;
+}
+
+/* INPUT */
+.input-box {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+button.send-btn {
+    padding: 12px 18px;
+    border: none;
+    background: #2c3e50;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button.send-btn:hover {
+    background: #1a252f;
+}
+
+.typing {
+    font-style: italic;
+    opacity: 0.7;
+}
+
+.dots::after {
+    content: "";
+    animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+    0% { content: ""; }
+    33% { content: "."; }
+    66% { content: ".."; }
+    100% { content: "..."; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <div class="header">
+        🏨 Hotel Assistant
+    </div>
+
+    <div class="chat-box" id="chat-box">
+        <div class="message bot">Hello! How can I help you today? 👋</div>
+    </div>
+
+    <!-- Suggestions INSIDE container -->
+    <div class="suggestions">
+        <button onclick="quickSend('Hotel location')">📍 Location</button>
+        <button onclick="quickSend('Show room prices')">💰 Prices</button>
+        <button onclick="quickSend('Book a room')">🛏️ Book</button>
+        <button onclick="quickSend('Amenities')">🏨 Amenities</button>
+        <button onclick="quickSend('Restaurant menu')">🍽️ Food</button>
+    </div>
+
+    <div class="input-box">
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button class="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+
+</div>
+
+<script>
+function quickSend(message) {
+    document.getElementById("user-input").value = message;
+    sendMessage();
+}
+function showTyping() {
+    let chatBox = document.getElementById("chat-box");
+
+    let typingDiv = document.createElement("div");
+    typingDiv.className = "message bot typing";
+    typingDiv.id = "typing";
+
+    typingDiv.innerHTML = "Hotel Assistant is typing<span class='dots'></span>";
+
+    chatBox.appendChild(typingDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function removeTyping() {
+    let typing = document.getElementById("typing");
+    if (typing) typing.remove();
+}
+
+function sendMessage() {
+    let input = document.getElementById("user-input");
+    let message = input.value;
+    if (!message) return;
+
+    let chatBox = document.getElementById("chat-box");
+
+    // Show user message
+    chatBox.innerHTML += `<div class="message user">${message}</div>`;
+    input.value = "";
+
+    // ✅ SHOW typing animation
+    showTyping();
+
+    fetch("/get", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: message })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        // ⏳ delay for realism
+        let delay = Math.min(1500, data.reply.length * 20);
+
+        setTimeout(() => {
+            removeTyping(); // ❌ remove typing
+            chatBox.innerHTML += `<div class="message bot">${data.reply}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }, delay);
+
+    });
+
+}
+
+/* ENTER KEY SUPPORT 🔥 */
+document.getElementById("user-input").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        sendMessage();
+    }
+});
+</script>
+
+</body>
+</html>
