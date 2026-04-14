@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Storybook Creator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+</head>
+<body>
+    <h1>📖 AI Storybook Creator</h1>
+    <p>Enter a theme or a prompt below, and let the AI write and illustrate a story for you.</p>
+
+    <form action="/generate" method="post">
+        <label for="prompt">Story Idea:</label>
+        <input type="text" id="prompt" name="prompt" placeholder="e.g., A brave robot discovering a hidden garden" required>
+        
+        <button type="submit">Generate My Story</button>
+    </form>
+
+    <footer style="margin-top: 50px; font-size: 0.8em; color: gray;">
+        PFAI Lab 13 - Final Project
+    </footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AI Story</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+</head>
+<body>
+    <h1>Your Story is Ready!</h1>
+    
+    <div class="story-container">
+        <img src="{{ image_url }}" alt="Story Illustration" style="width: 100%; border-radius: 8px;">
+        
+        <hr>
+
+        <div style="white-space: pre-wrap; line-height: 1.6;">
+            {{ story_text }}
+        </div>
+    </div>
+
+    <br>
+    <a href="/">← Create another story</a>
+</body>
+</html>
