@@ -22,7 +22,7 @@ def generate():
 
     try:
         # --- PART A: GENERATE THE STORY ---
-        # Using 2.5-flash: The most stable model in April 2026
+        # Using 2.5-flash: The most stable model 
         story_response = client.models.generate_content(
             model="gemini-2.5-flash", 
             contents=f"Write a professional 3-paragraph story based on: {user_prompt}"

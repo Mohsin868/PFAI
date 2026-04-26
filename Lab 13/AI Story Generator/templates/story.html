@@ -3,23 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your AI Story</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Your AI Masterpiece | Storybook AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+            color: #f8fafc;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .story-container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            
+            /* 1. The Gradient */
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            
+            /* 2. Standard Property (Stops the editor error) */
+            background-clip: text;
+            
+            /* 3. Webkit Properties (Makes it work in Chrome/Edge/Safari) */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* 4. Fallback for very old browsers */
+            color: #818cf8; 
+        }
+
+        .story-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .content {
+            font-family: 'Lora', serif; /* A classic font for better storytelling */
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e2e8f0;
+            white-space: pre-wrap;
+            margin-top: 20px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(99, 102, 241, 0.5), transparent);
+            margin: 30px 0;
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #818cf8;
+            transform: translateX(-5px);
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.75rem;
+            color: #64748b;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .story-container { padding: 20px; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Your Story is Ready!</h1>
-    
+
     <div class="story-container">
-        <img src="{{ image_url }}" alt="Story Illustration" style="width: 100%; border-radius: 8px;">
+        <h1>✨ Your Story is Ready</h1>
         
+        {% if image_url %}
+        <img src="{{ image_url }}" alt="Story Illustration" class="story-image">
+        {% endif %}
+
         <hr>
 
-        <div style="white-space: pre-wrap; line-height: 1.6;">
+        <div class="content">
             {{ story_text }}
         </div>
+
+        <a href="/" class="nav-link">← Create another masterpiece</a>
     </div>
 
-    <br>
-    <a href="/">← Create another story</a>
+    <footer>
+        Generated with AI &bull; PFAI Final Project
+    </footer>
+
 </body>
 </html>
