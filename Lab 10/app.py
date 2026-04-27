@@ -22,7 +22,7 @@ def get_bot_response(user_input):
     if response:
         return response
 
-    # 2. Amenities ⭐ (MOVE UP FIX)
+    # 2. Amenities 
     response = handle_amenities(user_input)
     if response:
         return response
@@ -163,7 +163,7 @@ def handle_booking(text):
 
 
 # =============================
-# 6. RESTAURANT (REQUIRED FEATURE)
+# 6. RESTAURANT 
 # =============================
 def handle_restaurant(text):
     if "chinese" in text:
@@ -182,7 +182,7 @@ def handle_restaurant(text):
 
 
 # =============================
-# 7. AMENITIES (NEW REQUIRED FEATURE ⭐)
+# 7. AMENITIES 
 # =============================
 def handle_amenities(text):
     if "amenities" in text or "facilities" in text:
@@ -214,7 +214,7 @@ def handle_availability(text):
 # =============================
 def fallback_response():
     return (
-        "I'm not sure I understand 🤔\n"
+        "I'm not sure I understand \n"
         "You can try:\n"
         "- 'Show room prices'\n"
         "- 'Book a room'\n"
@@ -223,7 +223,7 @@ def fallback_response():
     )
 
 # =============================
-# 10. HELPER FUNCTION TO CHECK IF TEXT CONTAINS A DATE (NEW REQUIRED FEATURE ⭐)
+# 10. HELPER FUNCTION TO CHECK IF TEXT CONTAINS A DATE
 # =============================
 def is_date(text):
     text = text.lower().strip()
